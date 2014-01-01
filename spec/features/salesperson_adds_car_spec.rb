@@ -34,40 +34,38 @@ feature 'Add new car', %Q{
     expect(page).to have_content 'Create Car'
   end
 
-  scenario 'supplies invalid attributes' do
-    it 'returns errors and does not save car' do
-      visit root_path
-      click_link 'Add Car'
-      click_button 'Create Car'
+  scenario 'does not supply required attributes' do
+    visit root_path
+    click_link 'Add Car'
+    click_button 'Create Car'
 
-      expect(Car.all.count).to eq 0
+    expect(Car.all.count).to eq 0
 
-      within '.input.car.color' do
-        expect(page).to have_content "can't be blank"
-      end
-
-      within '.input.car.year' do
-        expect(page).to have_content "can't be blank"
-      end
-
-      within '.input.car.mileage' do
-        expect(page).to have_content "can't be blank"
-      end
+    within '.input.car.color' do
+      expect(page).to have_content "can't be blank"
     end
 
-    it 'does not save a car with a year before 1980' do
-      car = FactoryGirl.build(:car)
-
-      visit root_path
-      click_link 'Add Car'
-      fill_in 'Color', with: car.color
-      fill_in 'Year', with: car.year
-      fill_in 'Mileage', with: car.mileage
-
-      click_button 'Create Car'
-
-      expect(Car.all.count).to eq 1
-      expect(page).to have_content 'must be 1980 or later'
+    within '.input.car.year' do
+      expect(page).to have_content "can't be blank"
     end
+
+    within '.input.car.mileage' do
+      expect(page).to have_content "can't be blank"
+    end
+  end
+
+  scenario 'does not save a car with a year before 1980' do
+    car = FactoryGirl.build(:car)
+
+    visit root_path
+    click_link 'Add Car'
+    fill_in 'Color', with: car.color
+    fill_in 'Year', with: car.year
+    fill_in 'Mileage', with: car.mileage
+
+    click_button 'Create Car'
+
+    expect(Car.all.count).to eq 1
+    expect(page).to have_content 'must be 1980 or later'
   end
 end
