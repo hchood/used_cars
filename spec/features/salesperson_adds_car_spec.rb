@@ -23,7 +23,6 @@ feature 'Add new car', %Q{
     car = FactoryGirl.build(:car)
 
     visit 'cars/new'
-    click_link 'Add Car'
     fill_in 'Color', with: car.color
     fill_in 'Year', with: car.year
     fill_in 'Mileage', with: car.mileage
@@ -57,7 +56,6 @@ feature 'Add new car', %Q{
     car = FactoryGirl.build(:car)
 
     visit 'cars/new'
-    click_link 'Add Car'
     fill_in 'Color', with: car.color
     fill_in 'Year', with: car.year
     fill_in 'Mileage', with: car.mileage
