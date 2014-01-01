@@ -8,7 +8,8 @@ class CarsController < ApplicationController
     if @car.save
       redirect_to new_car_path, notice: 'Success! Car has been added.'
     else
-      redirect_to new_car_path, notice: 'Sorry, we encountered some errors.'
+      flash[:notice] = 'Sorry, we encountered some errors.'
+      render 'new'
     end
   end
 

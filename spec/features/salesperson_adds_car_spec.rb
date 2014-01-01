@@ -28,7 +28,6 @@ feature 'Add new car', %Q{
     fill_in 'Mileage', with: car.mileage
 
     click_button 'Create Car'
-    save_and_open_page
     expect(Car.all.count).to eq 1
     expect(page).to have_content 'Success! Car has been added.'
     expect(page).to have_content 'Add New Car'
@@ -56,7 +55,7 @@ feature 'Add new car', %Q{
   end
 
   scenario 'does not save a car with a year before 1980' do
-    car = FactoryGirl.build(:car)
+    car = FactoryGirl.build(:car, year: 1970)
 
     visit 'cars/new'
     fill_in 'Color', with: car.color
@@ -64,8 +63,7 @@ feature 'Add new car', %Q{
     fill_in 'Mileage', with: car.mileage
 
     click_button 'Create Car'
-
-    expect(Car.all.count).to eq 1
+    expect(Car.all.count).to eq 0
     expect(page).to have_content 'must be 1980 or later'
     expect(page).to have_content 'Sorry, we encountered some errors.'
   end
