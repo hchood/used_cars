@@ -24,6 +24,7 @@ feature 'Add new car', %Q{
 
     visit 'cars/new'
     fill_in 'Color', with: car.color
+    fill_in 'Description', with: car.description
     fill_in 'Year', with: car.year
     fill_in 'Mileage', with: car.mileage
 
