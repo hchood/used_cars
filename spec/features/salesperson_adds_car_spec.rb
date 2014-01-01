@@ -41,15 +41,15 @@ feature 'Add new car', %Q{
     expect(Car.all.count).to eq 0
     expect(page).to have_content 'Sorry, we encountered some errors.'
 
-    within '.input.car.color' do
+    within '.input.car_color' do
       expect(page).to have_content "can't be blank"
     end
 
-    within '.input.car.year' do
+    within '.input.car_year' do
       expect(page).to have_content "can't be blank"
     end
 
-    within '.input.car.mileage' do
+    within '.input.car_mileage' do
       expect(page).to have_content "can't be blank"
     end
   end
