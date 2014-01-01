@@ -28,9 +28,11 @@ feature 'Add new car', %Q{
     fill_in 'Mileage', with: car.mileage
 
     click_button 'Create Car'
-
+    save_and_open_page
     expect(Car.all.count).to eq 1
-    expect(page).to have_content 'Create Car'
+    expect(page).to have_content 'Success! Car has been added.'
+    expect(page).to have_content 'Add New Car'
+
   end
 
   scenario 'does not supply required attributes' do
@@ -38,6 +40,7 @@ feature 'Add new car', %Q{
     click_button 'Create Car'
 
     expect(Car.all.count).to eq 0
+    expect(page).to have_content 'Sorry, we encountered some errors.'
 
     within '.input.car.color' do
       expect(page).to have_content "can't be blank"
@@ -64,5 +67,6 @@ feature 'Add new car', %Q{
 
     expect(Car.all.count).to eq 1
     expect(page).to have_content 'must be 1980 or later'
+    expect(page).to have_content 'Sorry, we encountered some errors.'
   end
 end
