@@ -22,7 +22,7 @@ feature 'Add new car', %Q{
   scenario 'supplies valid attributes' do
     car = FactoryGirl.build(:car)
 
-    visit root_path
+    visit 'cars/new'
     click_link 'Add Car'
     fill_in 'Color', with: car.color
     fill_in 'Year', with: car.year
@@ -35,8 +35,7 @@ feature 'Add new car', %Q{
   end
 
   scenario 'does not supply required attributes' do
-    visit root_path
-    click_link 'Add Car'
+    visit 'cars/new'
     click_button 'Create Car'
 
     expect(Car.all.count).to eq 0
@@ -57,7 +56,7 @@ feature 'Add new car', %Q{
   scenario 'does not save a car with a year before 1980' do
     car = FactoryGirl.build(:car)
 
-    visit root_path
+    visit 'cars/new'
     click_link 'Add Car'
     fill_in 'Color', with: car.color
     fill_in 'Year', with: car.year
